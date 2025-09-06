@@ -167,9 +167,69 @@
             animation: float 20s ease-in-out infinite;
         }
 
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float-particle 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { width: 4px; height: 4px; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 6px; height: 6px; left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { width: 3px; height: 3px; left: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { width: 5px; height: 5px; left: 40%; animation-delay: 3s; }
+        .particle:nth-child(5) { width: 4px; height: 4px; left: 50%; animation-delay: 4s; }
+        .particle:nth-child(6) { width: 6px; height: 6px; left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { width: 3px; height: 3px; left: 70%; animation-delay: 0.5s; }
+        .particle:nth-child(8) { width: 5px; height: 5px; left: 80%; animation-delay: 1.5s; }
+        .particle:nth-child(9) { width: 4px; height: 4px; left: 90%; animation-delay: 2.5s; }
+        .particle:nth-child(10) { width: 6px; height: 6px; left: 95%; animation-delay: 3.5s; }
+
+        @keyframes float-particle {
+            0%, 100% { 
+                transform: translateY(100vh) rotate(0deg); 
+                opacity: 0; 
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { 
+                transform: translateY(-100px) rotate(360deg); 
+                opacity: 0; 
+            }
         }
         
         .hero-content {
@@ -180,9 +240,11 @@
         
         .hero-title {
             font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: bold;
+            font-weight: 800;
             color: white;
             user-select: none;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            letter-spacing: -0.02em;
         }
 
         .hero-title span {
@@ -203,6 +265,11 @@
             margin: 1.5rem 0 2rem 0;
             opacity: 0;
             animation: slideInUp 1s ease-out 1.5s both;
+            font-weight: 300;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .hero-cta {
@@ -229,6 +296,23 @@
             background: white;
             color: var(--primary-color);
             box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
         }
 
         .btn-primary:hover {
@@ -267,6 +351,19 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
         }
         .section-subtitle {
             text-align: center;
@@ -283,6 +380,19 @@
             padding: 6rem 0;
             background: var(--bg-white-color);
             transition: background-color 0.3s ease;
+            position: relative;
+        }
+
+        .projects::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%236366f1" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            opacity: 0.3;
+            pointer-events: none;
         }
         .filter-buttons {
             display: flex;
@@ -300,6 +410,23 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .filter-btn:hover::before {
+            left: 100%;
         }
         .filter-btn:hover {
             color: var(--primary-color);
@@ -320,7 +447,9 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: var(--shadow-md);
-            transition: transform 0.3s ease, opacity 0.3s ease, height 0.3s ease, margin 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease, height 0.3s ease, margin 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .project-card.hidden {
             transform: scale(0.8);
@@ -334,7 +463,24 @@
         }
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: var(--shadow-xl);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(99, 102, 241, 0.1);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
         }
         .project-image {
             height: 250px;
@@ -345,6 +491,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
         }
         .project-content { padding: 2rem; }
         .project-title {
@@ -366,7 +516,20 @@
         }
         .project-description { color: var(--text-light-color); margin-bottom: 1.5rem; }
         .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .tech-tag { padding: 0.25rem 0.75rem; background: var(--bg-white-color); color: var(--primary-color); border-radius: 15px; font-size: 0.875rem; font-weight: 500; }
+        .tech-tag { 
+            padding: 0.25rem 0.75rem; 
+            background: var(--bg-white-color); 
+            color: var(--primary-color); 
+            border-radius: 15px; 
+            font-size: 0.875rem; 
+            font-weight: 500; 
+            transition: all 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        .tech-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(99, 102, 241, 0.2);
+        }
         body.dark .tech-tag { background: var(--bg-light-color); }
         
         /* About & Contact Sections */
@@ -376,7 +539,30 @@
         .about-text h2, .contact h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .about-text p, .contact p { font-size: 1.1rem; color: var(--text-light-color); margin-bottom: 2rem; }
         .skills { display: flex; flex-wrap: wrap; gap: 1rem; }
-        .skill-item { padding: 0.75rem 1.5rem; background: var(--bg-white-color); border-radius: 25px; font-weight: 600; color: var(--primary-color); box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .skill-item { 
+            padding: 0.75rem 1.5rem; 
+            background: var(--bg-white-color); 
+            border-radius: 25px; 
+            font-weight: 600; 
+            color: var(--primary-color); 
+            box-shadow: var(--shadow-sm); 
+            transition: all 0.3s ease; 
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        .skill-item:hover::before {
+            left: 100%;
+        }
         body.dark .skill-item { background: var(--bg-light-color); }
         .skill-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
         
@@ -385,17 +571,67 @@
             height: 400px;
             border-radius: 20px; 
             overflow: hidden;
+            box-shadow: var(--shadow-lg);
         }
         .about-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+        .about-image:hover::before {
+            opacity: 1;
         }
 
         .contact-content { text-align: center; max-width: 600px; margin: 0 auto; }
         .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
-        .contact-link { display: flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; background: var(--gradient-primary); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; box-shadow: var(--shadow-md); }
-        .contact-link:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+        .contact-link { 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            padding: 1rem 2rem; 
+            background: var(--gradient-primary); 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-weight: 600; 
+            transition: all 0.3s ease; 
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        .contact-link:hover::before {
+            left: 100%;
+        }
+        .contact-link:hover { 
+            transform: translateY(-3px); 
+            box-shadow: var(--shadow-lg); 
+        }
 
         /* Footer */
         .footer { background: var(--text-dark-color); color: var(--bg-white-color); text-align: center; padding: 2rem 0; transition: background-color 0.3s ease, color 0.3s ease; }
@@ -447,9 +683,10 @@
     </nav>
 
     <section id="home" class="hero">
+        <div class="particles" id="particles"></div>
         <div class="hero-content">
             <h1 class="hero-title" id="animated-name"></h1>
-            <p class="hero-subtitle">Electrical Engineering Student | Python Developer | Hardware Enthusiast</p>
+            <p class="hero-subtitle">Electrical & Electronics Engineering Student at Covenant University (Class of 2028)</p>
             <div class="hero-cta">
                 <a href="#projects" class="btn btn-primary">View My Work</a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch</a>
@@ -474,7 +711,12 @@
                 <div class="project-card fade-in" data-category="python api">
                     <div class="project-image"><img src="images/p1.png" alt="Nigerian States Weather Enricher" loading="lazy"></div>
                     <div class="project-content">
-                        <h3 class="project-title"><a href="https://github.com/Mikey-the-creator/Nigerian-states-weather" target="_blank">Nigerian States Weather Enricher</a></h3>
+                        <h3 class="project-title">
+                            Nigerian States Weather Enricher
+                            <a href="https://github.com/Mikey-the-creator/Nigerian-states-weather" target="_blank" class="project-link-icon" aria-label="View on GitHub">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            </a>
+                        </h3>
                         <p class="project-description">Developed a Python script that fetches live weather data from the OpenWeather API and merges it into state datasets using Pandas.</p>
                         <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">Pandas</span><span class="tech-tag">OpenWeather API</span></div>
                     </div>
@@ -482,7 +724,12 @@
                 <div class="project-card fade-in" data-category="python api">
                     <div class="project-image"><img src="images/p2.png" alt="Tkinter Weather App" loading="lazy"></div>
                     <div class="project-content">
-                        <h3 class="project-title"><a href="https://github.com/Mikey-the-creator/Tkinter-weather-app" target="_blank">Tkinter Weather App</a></h3>
+                        <h3 class="project-title">
+                            Tkinter Weather App
+                            <a href="https://github.com/Mikey-the-creator/Tkinter-weather-app" target="_blank" class="project-link-icon" aria-label="View on GitHub">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            </a>
+                        </h3>
                         <p class="project-description">Built a desktop weather application using Tkinter that fetches real-time weather data via API calls and displays it with animated visuals.</p>
                         <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">Tkinter</span><span class="tech-tag">Requests API</span></div>
                     </div>
@@ -490,7 +737,12 @@
                 <div class="project-card fade-in" data-category="python api">
                     <div class="project-image"><img src="images/p3.png" alt="Stock Market Analyzer" loading="lazy"></div>
                     <div class="project-content">
-                        <h3 class="project-title"><a href="https://github.com/Mikey-the-creator/stock-market-analyser" target="_blank">Stock Market Analyzer</a></h3>
+                        <h3 class="project-title">
+                            Stock Market Analyzer
+                            <a href="https://github.com/Mikey-the-creator/stock-market-analyser" target="_blank" class="project-link-icon" aria-label="View on GitHub">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            </a>
+                        </h3>
                         <p class="project-description">Created a Python tool that retrieves stock data via Alpha Vantage API, applies moving averages, and visualizes results with Matplotlib.</p>
                         <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">Pandas</span><span class="tech-tag">Matplotlib</span></div>
                     </div>
@@ -498,7 +750,12 @@
                 <div class="project-card fade-in" data-category="python ml">
                     <div class="project-image"><img src="images/p4.png" alt="Feature Scaling Nigeria" loading="lazy"></div>
                     <div class="project-content">
-                        <h3 class="project-title"><a href="https://github.com/Mikey-the-creator/feature-scaling-nigeria" target="_blank">Feature Scaling Nigeria</a></h3>
+                        <h3 class="project-title">
+                            Feature Scaling Nigeria
+                            <a href="https://github.com/Mikey-the-creator/feature-scaling-nigeria" target="_blank" class="project-link-icon" aria-label="View on GitHub">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            </a>
+                        </h3>
                         <p class="project-description">Designed a preprocessing script that applies normalization and standardization to Nigerian datasets with NumPy and Pandas.</p>
                         <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">NumPy</span><span class="tech-tag">Pandas</span></div>
                     </div>
@@ -506,7 +763,12 @@
                 <div class="project-card fade-in" data-category="python">
                     <div class="project-image"><img src="images/p5.png" alt="Simple Python Bank Account OOP" loading="lazy"></div>
                     <div class="project-content">
-                        <h3 class="project-title"><a href="https://github.com/Mikey-the-creator/Simple-Python-Bank-Account-OOP" target="_blank">Simple Python Bank Account (OOP)</a></h3>
+                        <h3 class="project-title">
+                            Simple Python Bank Account (OOP)
+                            <a href="https://github.com/Mikey-the-creator/Simple-Python-Bank-Account-OOP" target="_blank" class="project-link-icon" aria-label="View on GitHub">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            </a>
+                        </h3>
                         <p class="project-description">Built a simple banking system simulation in Python where users can create accounts, deposit, withdraw, and track transaction history.</p>
                         <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">OOP</span></div>
                     </div>
@@ -514,7 +776,12 @@
                 <div class="project-card fade-in" data-category="hardware">
                     <div class="project-image"><img src="images/p6.png" alt="Arduino LDR Security Alarm System" loading="lazy"></div>
                     <div class="project-content">
-                        <h3 class="project-title"><a href="https://www.linkedin.com/posts/michael-akpore-683a27207_day-16-arduino-ldr-security-alarm-system-activity-7368431938749046784-PY3J?utm_source=share&utm_medium=member_desktop" target="_blank">Arduino LDR Security Alarm</a></h3>
+                        <h3 class="project-title">
+                            Arduino LDR Security Alarm
+                            <a href="https://www.linkedin.com/posts/michael-akpore-683a27207_day-16-arduino-ldr-security-alarm-system-activity-7368431938749046784-PY3J?utm_source=share&utm_medium=member_desktop" target="_blank" class="project-link-icon" aria-label="View on LinkedIn">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            </a>
+                        </h3>
                         <p class="project-description">A simple yet powerful alarm system using an LDR to sense light levels. When a light beam is interrupted, a buzzer and LED trigger an alarm.</p>
                         <div class="project-tech"><span class="tech-tag">Arduino</span><span class="tech-tag">Circuit Design</span><span class="tech-tag">Embedded Systems</span></div>
                     </div>
@@ -528,7 +795,7 @@
             <div class="about-content">
                 <div class="about-text fade-in">
                     <h2>About Me</h2>
-                    <p>Hi! I’m Akpore Michael, an Electrical and Electronics Engineering undergraduate from Nigeria with a passion for building smart, hands-on projects and solving real-world problems through technology. I love exploring both hardware and software, from Arduino projects that bring ideas to life to Python programming that transforms data into meaningful insights.</p>
+                    <p>Hi! I’m Akpore Michael, an Electrical and Electronics Engineering undergraduate at Covenant University, expecting to graduate in 2028. I have a passion for building smart, hands-on projects and solving real-world problems through technology. I love exploring both hardware and software, from Arduino projects that bring ideas to life to Python programming that transforms data into meaningful insights.</p>
                     <p>I’m driven by curiosity and continuous learning, always looking for opportunities to push my skills further—whether it’s creating intermediate-to-advanced electronics projects, diving into software development, or preparing for a top-tier internship in the tech industry. My projects reflect my dedication to combining creativity with technical expertise, and I aim to make every project both functional and impactful.</p>
                     <p>When I’m not tinkering with electronics or coding, I enjoy exploring innovative ways to apply technology to everyday life and sharing my learning journey with others.</p>
                     <div class="skills">
@@ -542,7 +809,7 @@
                     </div>
                 </div>
                 <div class="about-image fade-in">
-                    <img src="images/pic.png" alt="A photo of Akpore Michael">
+                    <img src="images/pic.jpg" alt="A photo of Akpore Michael">
                 </div>
             </div>
         </div>
@@ -651,6 +918,23 @@
 
         // --- DYNAMIC FOOTER YEAR ---
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // --- FLOATING PARTICLES ---
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        createParticles();
     </script>
 </body>
 </html>
