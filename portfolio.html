@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio - Showcasing Creative Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            
+            /* Light Theme Variables */
+            --text-dark-color: #1f2937;
+            --text-light-color: #6b7280;
+            --bg-light-color: #f8fafc;
+            --bg-white-color: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            
+            --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --gradient-secondary: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+        }
+
+        body.dark {
+            /* Dark Theme Variables */
+            --text-dark-color: #f8fafc;
+            --text-light-color: #9ca3af;
+            --bg-light-color: #111827;
+            --bg-white-color: #1f2937;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark-color);
+            background: var(--bg-light-color);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Shadow variables using the shadow color */
+        :root {
+            --shadow-sm: 0 1px 2px 0 var(--shadow-color);
+            --shadow-md: 0 4px 6px -1px var(--shadow-color);
+            --shadow-lg: 0 10px 15px -3px var(--shadow-color);
+            --shadow-xl: 0 20px 25px -5px var(--shadow-color);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: background-color 0.3s ease;
+        }
+        body.dark .navbar {
+            background: rgba(31, 41, 55, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            line-height: 1;
+            color: var(--text-dark-color);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+        .theme-toggle .moon { display: none; }
+        body.dark .theme-toggle .sun { display: none; }
+        body.dark .theme-toggle .moon { display: block; }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%); 
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: bold;
+            color: white;
+            user-select: none;
+        }
+
+        .hero-title span {
+            display: inline-block;
+            opacity: 0;
+            filter: blur(4px);
+            transition: opacity 0.4s ease-in-out, filter 0.6s ease-in-out;
+            will-change: opacity, filter;
+        }
+
+        .hero-title span.visible {
+            opacity: 1;
+            filter: blur(0px);
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            margin: 1.5rem 0 2rem 0;
+            opacity: 0;
+            animation: slideInUp 1s ease-out 1.5s both;
+        }
+        
+        .hero-cta {
+            display: inline-flex;
+            gap: 1rem;
+            opacity: 0;
+            animation: slideInUp 1s ease-out 1.7s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* General Section Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light-color);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 6rem 0;
+            background: var(--bg-white-color);
+            transition: background-color 0.3s ease;
+        }
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            background-color: var(--bg-light-color);
+            color: var(--text-light-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .filter-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background: var(--bg-light-color);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease, opacity 0.3s ease, height 0.3s ease, margin 0.3s ease;
+        }
+        .project-card.hidden {
+            transform: scale(0.8);
+            opacity: 0;
+            pointer-events: none;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            overflow: hidden;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+        .project-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .project-content { padding: 2rem; }
+        .project-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+        .project-title a { color: var(--text-dark-color); text-decoration: none; transition: color 0.3s ease; }
+        .project-title a:hover { color: var(--primary-color); }
+        .project-description { color: var(--text-light-color); margin-bottom: 1.5rem; }
+        .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tech-tag { padding: 0.25rem 0.75rem; background: var(--bg-white-color); color: var(--primary-color); border-radius: 15px; font-size: 0.875rem; font-weight: 500; }
+        body.dark .tech-tag { background: var(--bg-light-color); }
+        
+        /* About & Contact Sections */
+        .about, .contact { padding: 6rem 0; background: var(--bg-light-color); transition: background-color 0.3s ease; }
+        body.dark .about { background: var(--bg-white-color); }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .about-text h2, .contact h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .about-text p, .contact p { font-size: 1.1rem; color: var(--text-light-color); margin-bottom: 2rem; }
+        .skills { display: flex; flex-wrap: wrap; gap: 1rem; }
+        .skill-item { padding: 0.75rem 1.5rem; background: var(--bg-white-color); border-radius: 25px; font-weight: 600; color: var(--primary-color); box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        body.dark .skill-item { background: var(--bg-light-color); }
+        .skill-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .about-image { position: relative; height: 400px; background: var(--gradient-secondary); border-radius: 20px; }
+        .contact-content { text-align: center; max-width: 600px; margin: 0 auto; }
+        .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+        .contact-link { display: flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; background: var(--gradient-primary); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; box-shadow: var(--shadow-md); }
+        .contact-link:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+
+        /* Footer */
+        .footer { background: var(--text-dark-color); color: var(--bg-white-color); text-align: center; padding: 2rem 0; transition: background-color 0.3s ease, color 0.3s ease; }
+        body.dark .footer { background: #111827; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu { gap: 1rem; }
+            .nav-links { position: fixed; top: 0; right: -100%; height: 100vh; width: 70%; background: var(--bg-white-color); flex-direction: column; justify-content: center; align-items: center; box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: right 0.4s ease-in-out; }
+            .nav-links.active { right: 0; }
+            .nav-toggle { display: block; position: relative; z-index: 1001; }
+            .nav-toggle.active .hamburger { background: transparent; }
+            .nav-toggle.active .hamburger::before { transform: rotate(45deg); top: 0; }
+            .nav-toggle.active .hamburger::after { transform: rotate(-45deg); bottom: 0; }
+            .about-content { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Scroll animations */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-light-color); }
+        ::-webkit-scrollbar-thumb { background: var(--gradient-primary); border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Portfolio</div>
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <span class="sun">☀️</span>
+                    <span class="moon">🌙</span>
+                </button>
+                <button class="nav-toggle" aria-label="toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title" id="animated-name"></h1>
+            <p class="hero-subtitle">Electrical Engineering Student | Python Developer | Hardware Enthusiast</p>
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title fade-in">Featured Projects</h2>
+            <p class="section-subtitle fade-in">A collection of my recent work</p>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="python">Python</button>
+                <button class="filter-btn" data-filter="api">APIs</button>
+                <button class="filter-btn" data-filter="ml">ML</button>
+                <button class="filter-btn" data-filter="hardware">Hardware</button>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card fade-in" data-category="python api">
+                    <div class="project-image"><img src="https://placehold.co/600x400/6366f1/white?text=Weather+Enricher" alt="Nigerian States Weather Enricher" loading="lazy"></div>
+                    <div class="project-content">
+                        <h3 class="project-title"><a href="https://github.com/Mikey-the-creator/Nigerian-states-weather" target="_blank">Nigerian States Weather Enricher</a></h3>
+                        <p class="project-description">Developed a Python script that fetches live weather data from the OpenWeather API and merges it into state datasets using Pandas.</p>
+                        <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">Pandas</span><span class="tech-tag">OpenWeather API</span></div>
+                    </div>
+                </div>
+                <div class="project-card fade-in" data-category="python api">
+                    <div class="project-image"><img src="https://placehold.co/600x400/8b5cf6/white?text=Tkinter+App" alt="Tkinter Weather App" loading="lazy"></div>
+                    <div class="project-content">
+                        <h3 class="project-title"><a href="https://github.com/Mikey-the-creator/Tkinter-weather-app" target="_blank">Tkinter Weather App</a></h3>
+                        <p class="project-description">Built a desktop weather application using Tkinter that fetches real-time weather data via API calls and displays it with animated visuals.</p>
+                        <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">Tkinter</span><span class="tech-tag">Requests API</span></div>
+                    </div>
+                </div>
+                <div class="project-card fade-in" data-category="python api">
+                    <div class="project-image"><img src="https://placehold.co/600x400/06b6d4/white?text=Stock+Analyzer" alt="Stock Market Analyzer" loading="lazy"></div>
+                    <div class="project-content">
+                        <h3 class="project-title"><a href="https://github.com/Mikey-the-creator/stock-market-analyser" target="_blank">Stock Market Analyzer</a></h3>
+                        <p class="project-description">Created a Python tool that retrieves stock data via Alpha Vantage API, applies moving averages, and visualizes results with Matplotlib.</p>
+                        <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">Pandas</span><span class="tech-tag">Matplotlib</span></div>
+                    </div>
+                </div>
+                <div class="project-card fade-in" data-category="python ml">
+                    <div class="project-image"><img src="https://placehold.co/600x400/3b82f6/white?text=Feature+Scaling" alt="Feature Scaling Nigeria" loading="lazy"></div>
+                    <div class="project-content">
+                        <h3 class="project-title"><a href="https://github.com/Mikey-the-creator/feature-scaling-nigeria" target="_blank">Feature Scaling Nigeria</a></h3>
+                        <p class="project-description">Designed a preprocessing script that applies normalization and standardization to Nigerian datasets with NumPy and Pandas.</p>
+                        <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">NumPy</span><span class="tech-tag">Pandas</span></div>
+                    </div>
+                </div>
+                <div class="project-card fade-in" data-category="python">
+                    <div class="project-image"><img src="https://placehold.co/600x400/ef4444/white?text=Bank+Account+OOP" alt="Simple Python Bank Account OOP" loading="lazy"></div>
+                    <div class="project-content">
+                        <h3 class="project-title"><a href="https://github.com/Mikey-the-creator/Simple-Python-Bank-Account-OOP" target="_blank">Simple Python Bank Account (OOP)</a></h3>
+                        <p class="project-description">Built a simple banking system simulation in Python where users can create accounts, deposit, withdraw, and track transaction history.</p>
+                        <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">OOP</span></div>
+                    </div>
+                </div>
+                <div class="project-card fade-in" data-category="hardware">
+                    <div class="project-image"><img src="https://placehold.co/600x400/10b981/white?text=Arduino+Alarm" alt="Arduino LDR Security Alarm System" loading="lazy"></div>
+                    <div class="project-content">
+                        <h3 class="project-title"><a href="https://www.linkedin.com/posts/michael-akpore-683a27207_day-16-arduino-ldr-security-alarm-system-activity-7368431938749046784-PY3J?utm_source=share&utm_medium=member_desktop" target="_blank">Arduino LDR Security Alarm</a></h3>
+                        <p class="project-description">A simple yet powerful alarm system using an LDR to sense light levels. When a light beam is interrupted, a buzzer and LED trigger an alarm.</p>
+                        <div class="project-tech"><span class="tech-tag">Arduino</span><span class="tech-tag">Circuit Design</span><span class="tech-tag">Embedded Systems</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h2>About Me</h2>
+                    <p>Hi! I’m Akpore Michael, an Electrical and Electronics Engineering undergraduate from Nigeria with a passion for building smart, hands-on projects and solving real-world problems through technology. I love exploring both hardware and software, from Arduino projects that bring ideas to life to Python programming that transforms data into meaningful insights.</p>
+                    <p>I’m driven by curiosity and continuous learning, always looking for opportunities to push my skills further—whether it’s creating intermediate-to-advanced electronics projects, diving into software development, or preparing for a top-tier internship in the tech industry. My projects reflect my dedication to combining creativity with technical expertise, and I aim to make every project both functional and impactful.</p>
+                    <p>When I’m not tinkering with electronics or coding, I enjoy exploring innovative ways to apply technology to everyday life and sharing my learning journey with others.</p>
+                    <div class="skills">
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">Data Analysis</span>
+                        <span class="skill-item">Pandas & NumPy</span>
+                        <span class="skill-item">API Integration</span>
+                        <span class="skill-item">Electronics & Arduino</span>
+                        <span class="skill-item">Machine Learning</span>
+                        <span class="skill-item">Tkinter (GUI)</span>
+                    </div>
+                </div>
+                <div class="about-image fade-in"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content fade-in">
+                <h2>Let's Work Together</h2>
+                <p>I'm always interested in new opportunities and exciting projects. Let's discuss how we can bring your ideas to life!</p>
+                <div class="contact-links">
+                    <a href="mailto:michaelakpore7@gmail.com" class="contact-link" aria-label="Send me an email"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> Email Me</a>
+                    <a href="https://linkedin.com/in/yourprofile" class="contact-link" aria-label="Visit my LinkedIn profile"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+                    <a href="https://github.com/Mikey-the-creator" class="contact-link" aria-label="View my GitHub profile"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="year"></span> Akpore Michael. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- THEME TOGGLE SCRIPT ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const applyTheme = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') body.classList.add('dark');
+        };
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+        });
+        applyTheme();
+
+        // --- PROJECT FILTERING SCRIPT ---
+        const filterContainer = document.querySelector('.filter-buttons');
+        const projectCards = document.querySelectorAll('.project-card');
+        filterContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                filterContainer.querySelector('.active').classList.remove('active');
+                e.target.classList.add('active');
+                const filterValue = e.target.getAttribute('data-filter');
+                projectCards.forEach(card => {
+                    if (filterValue === 'all' || card.dataset.category.includes(filterValue)) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            }
+        });
+
+        // --- FADE & BLUR NAME ANIMATION ---
+        const heroTitle = document.getElementById('animated-name');
+        const text = "Akpore Michael";
+        heroTitle.textContent = '';
+        text.split('').forEach(letter => {
+            const span = document.createElement('span');
+            span.textContent = letter === ' ' ? '\u00A0' : letter;
+            heroTitle.appendChild(span);
+        });
+        window.addEventListener('load', () => {
+            heroTitle.querySelectorAll('span').forEach((span, index) => {
+                setTimeout(() => { span.classList.add('visible'); }, 75 * index);
+            });
+        });
+
+        // --- SMOOTH SCROLL & NAVBAR SCRIPT ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                // Close mobile nav on link click
+                if (navLinks.classList.contains('active')) {
+                    navToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            navbar.style.boxShadow = window.scrollY > 50 ? '0 2px 20px rgba(0,0,0,0.1)' : 'none';
+        });
+
+        // --- FADE-IN ON SCROLL OBSERVER ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        
+        // --- MOBILE NAV TOGGLE ---
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // --- DYNAMIC FOOTER YEAR ---
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
