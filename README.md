@@ -2,9 +2,6 @@
 
 A clean, modern, and fully responsive personal portfolio website built from scratch with HTML, CSS, and vanilla JavaScript. Designed to showcase my skills and projects in a professional and visually appealing way.
 
-**[➡️ View Live Demo](https://mikey-the-creator.github.io/Personal-Portfolio-site/)** *(You'll need to set up GitHub Pages for this link to work—see instructions below)*
-
----
 
 ![Portfolio Screenshot](images/screenshot.png)
 *(Suggestion: Add a screenshot of your finished portfolio here in an `images` folder)*
