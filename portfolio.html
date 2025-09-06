@@ -446,7 +446,7 @@
             
             <div class="projects-grid">
                 <div class="project-card fade-in" data-category="python api">
-                    <div class="project-image"><img src="https://placehold.co/600x400/6366f1/white?text=Weather+Enricher" alt="Nigerian States Weather Enricher" loading="lazy"></div>
+                    <div class="project-image"><img src="images/p1.png" alt="Nigerian States Weather Enricher" loading="lazy"></div>
                     <div class="project-content">
                         <h3 class="project-title"><a href="https://github.com/Mikey-the-creator/Nigerian-states-weather" target="_blank">Nigerian States Weather Enricher</a></h3>
                         <p class="project-description">Developed a Python script that fetches live weather data from the OpenWeather API and merges it into state datasets using Pandas.</p>
@@ -454,7 +454,7 @@
                     </div>
                 </div>
                 <div class="project-card fade-in" data-category="python api">
-                    <div class="project-image"><img src="https://placehold.co/600x400/8b5cf6/white?text=Tkinter+App" alt="Tkinter Weather App" loading="lazy"></div>
+                    <div class="project-image"><img src="images/p2.png" alt="Tkinter Weather App" loading="lazy"></div>
                     <div class="project-content">
                         <h3 class="project-title"><a href="https://github.com/Mikey-the-creator/Tkinter-weather-app" target="_blank">Tkinter Weather App</a></h3>
                         <p class="project-description">Built a desktop weather application using Tkinter that fetches real-time weather data via API calls and displays it with animated visuals.</p>
@@ -462,7 +462,7 @@
                     </div>
                 </div>
                 <div class="project-card fade-in" data-category="python api">
-                    <div class="project-image"><img src="https://placehold.co/600x400/06b6d4/white?text=Stock+Analyzer" alt="Stock Market Analyzer" loading="lazy"></div>
+                    <div class="project-image"><img src="images/p3.png" alt="Stock Market Analyzer" loading="lazy"></div>
                     <div class="project-content">
                         <h3 class="project-title"><a href="https://github.com/Mikey-the-creator/stock-market-analyser" target="_blank">Stock Market Analyzer</a></h3>
                         <p class="project-description">Created a Python tool that retrieves stock data via Alpha Vantage API, applies moving averages, and visualizes results with Matplotlib.</p>
@@ -470,7 +470,7 @@
                     </div>
                 </div>
                 <div class="project-card fade-in" data-category="python ml">
-                    <div class="project-image"><img src="https://placehold.co/600x400/3b82f6/white?text=Feature+Scaling" alt="Feature Scaling Nigeria" loading="lazy"></div>
+                    <div class="project-image"><img src="images/p4.png" alt="Feature Scaling Nigeria" loading="lazy"></div>
                     <div class="project-content">
                         <h3 class="project-title"><a href="https://github.com/Mikey-the-creator/feature-scaling-nigeria" target="_blank">Feature Scaling Nigeria</a></h3>
                         <p class="project-description">Designed a preprocessing script that applies normalization and standardization to Nigerian datasets with NumPy and Pandas.</p>
@@ -478,7 +478,7 @@
                     </div>
                 </div>
                 <div class="project-card fade-in" data-category="python">
-                    <div class="project-image"><img src="https://placehold.co/600x400/ef4444/white?text=Bank+Account+OOP" alt="Simple Python Bank Account OOP" loading="lazy"></div>
+                    <div class="project-image"><img src="images/p5.png" alt="Simple Python Bank Account OOP" loading="lazy"></div>
                     <div class="project-content">
                         <h3 class="project-title"><a href="https://github.com/Mikey-the-creator/Simple-Python-Bank-Account-OOP" target="_blank">Simple Python Bank Account (OOP)</a></h3>
                         <p class="project-description">Built a simple banking system simulation in Python where users can create accounts, deposit, withdraw, and track transaction history.</p>
@@ -486,7 +486,7 @@
                     </div>
                 </div>
                 <div class="project-card fade-in" data-category="hardware">
-                    <div class="project-image"><img src="https://placehold.co/600x400/10b981/white?text=Arduino+Alarm" alt="Arduino LDR Security Alarm System" loading="lazy"></div>
+                    <div class="project-image"><img src="images/p6.png" alt="Arduino LDR Security Alarm System" loading="lazy"></div>
                     <div class="project-content">
                         <h3 class="project-title"><a href="https://www.linkedin.com/posts/michael-akpore-683a27207_day-16-arduino-ldr-security-alarm-system-activity-7368431938749046784-PY3J?utm_source=share&utm_medium=member_desktop" target="_blank">Arduino LDR Security Alarm</a></h3>
                         <p class="project-description">A simple yet powerful alarm system using an LDR to sense light levels. When a light beam is interrupted, a buzzer and LED trigger an alarm.</p>
@@ -588,6 +588,9 @@
         });
 
         // --- SMOOTH SCROLL & NAVBAR SCRIPT ---
+        const navLinks = document.querySelector('.nav-links'); // Defined once here
+        const navToggle = document.querySelector('.nav-toggle'); // Defined once here
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -613,8 +616,6 @@
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         
         // --- MOBILE NAV TOGGLE ---
-        const navToggle = document.querySelector('.nav-toggle');
-        const navLinks = document.querySelector('.nav-links');
         navToggle.addEventListener('click', () => {
             navToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
