@@ -4,8 +4,6 @@ A clean, modern, and fully responsive personal portfolio website built from scra
 
 
 ![Portfolio Screenshot](Screenshot.png)
-*(Suggestion: Add a screenshot of your finished portfolio here in an `images` folder)*
-
 ## ✨ Features
 
 - **Elegant Hero Animation:** A custom "Fade & Blur" text animation for the main heading, built with vanilla JavaScript for a smooth, sequential reveal.
